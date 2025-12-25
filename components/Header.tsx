@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onLogout?: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onLogout }) => {
   const [logo, setLogo] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -18,7 +22,6 @@ const Header: React.FC = () => {
       
       reader.onloadend = () => {
         const base64String = reader.result as string;
-        // Basic check to prevent localStorage quota issues (approx 3MB limit safe zone)
         if (base64String.length > 3000000) {
           alert("Logo boyutu çok büyük! Lütfen daha küçük bir dosya seçin.");
           return;
@@ -68,6 +71,18 @@ const Header: React.FC = () => {
             <p className="text-xs text-brand-200 uppercase tracking-wider font-medium">Sosyal Medya Asistanı</p>
           </div>
         </div>
+
+        {onLogout && (
+          <button 
+            onClick={onLogout}
+            className="p-2 rounded-full hover:bg-brand-800 transition-colors text-brand-300 hover:text-white"
+            title="Güvenli Çıkış"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+          </button>
+        )}
       </div>
     </header>
   );

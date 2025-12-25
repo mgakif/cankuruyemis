@@ -1,14 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import InputSection from './components/InputSection';
 import ResultCard from './components/ResultCard';
+import LoginForm from './components/LoginForm';
 import { generatePostContent, generateVisualContent } from './services/geminiService';
 import { LoadingState, GeneratedContent, GenerationMode, VisualGenerationType, AspectRatio } from './types';
 
 const App: React.FC = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [loadingState, setLoadingState] = useState<LoadingState>(LoadingState.IDLE);
   const [result, setResult] = useState<GeneratedContent | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Check if user was previously logged in
+    const authStatus = localStorage.getItem('canKuruyemisAuth');
+    if (authStatus === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+    localStorage.setItem('canKuruyemisAuth', 'true');
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('canKuruyemisAuth');
+  };
 
   const handleGenerate = async (
       text: string, 
@@ -31,12 +51,10 @@ const App: React.FC = () => {
           tokenUsage: responseData.usage
         });
       } else {
-        // If logo inclusion is requested, try to get it from local storage
         let logoBase64: string | null = null;
         if (includeLogo) {
             logoBase64 = localStorage.getItem('canKuruyemisLogo');
             if (!logoBase64) {
-                // Warning but proceed without logo
                 alert("Logo bulunamadı! Lütfen önce sağ üst köşeden logo yükleyiniz.");
             }
         }
@@ -56,13 +74,17 @@ const App: React.FC = () => {
     }
   };
 
+  if (!isAuthenticated) {
+    return <LoginForm onLogin={handleLogin} />;
+  }
+
   return (
-    <div className="min-h-screen flex flex-col bg-brand-50 pb-12">
-      <Header />
+    <div className="min-h-screen flex flex-col bg-brand-50 pb-12 animate-fade-in">
+      <Header onLogout={handleLogout} />
       
       <main className="flex-grow w-full max-w-3xl mx-auto px-4 py-8">
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-brand-900 mb-2">Hoşgeldin, Esnafım! 👋</h2>
+          <h2 className="text-2xl font-bold text-brand-900 mb-2">Hoşgeldin, Şafak Esnafım! 👋</h2>
           <p className="text-brand-800">
             Bugün tezgahta ne var? Fotoğraf yükle, metin yazdır veya 
             <span className="font-bold text-brand-600"> yeni Stüdyo Modu</span> ile ürünlerinin profesyonel fotoğraflarını çektir!
