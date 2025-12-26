@@ -16,6 +16,7 @@ const App: React.FC = () => {
   const [activeMode, setActiveMode] = useState<GenerationMode>(GenerationMode.TEXT);
   const [savedItems, setSavedItems] = useState<SavedItem[]>([]);
   
+  // States to pass from ResultCard to InputSection for the "Design Ad" flow
   const [initialPrompt, setInitialPrompt] = useState<string>('');
 
   useEffect(() => {
@@ -59,24 +60,12 @@ const App: React.FC = () => {
   };
 
   const handleDesignAdFromText = (text: string) => {
+      // Extract first part of content as a hint for the image prompt
       const hint = text.split('\n').find(l => l.length > 20) || text.substring(0, 100);
       setInitialPrompt(`Analize dayalı profesyonel reklam: ${hint.substring(0, 150)}...`);
       setActiveMode(GenerationMode.IMAGE);
       setResult(null);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleTestImage = () => {
-    // 100x100 Turuncu bir test karesi (Base64)
-    const dummyImage = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAL0lEQVR42u3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO8G7f4AAXf86v8AAAAASUVORK5CYII=";
-    setResult({
-      type: 'IMAGE',
-      content: dummyImage,
-      tokenUsage: { promptTokens: 0, responseTokens: 0, totalTokens: 0 }
-    });
-    setLoadingState(LoadingState.SUCCESS);
-    setActiveMode(GenerationMode.IMAGE);
-    alert("🔧 Test Görseli Hazır! Şimdi 'Drive'a At' butonunu test edebilirsin esnafım.");
   };
 
   const handleGenerate = async (
@@ -115,7 +104,7 @@ const App: React.FC = () => {
       }
       
       setLoadingState(LoadingState.SUCCESS);
-      setInitialPrompt(''); 
+      setInitialPrompt(''); // Clear initial prompt after use
     } catch (err: any) {
       setError(err.message || "Bilinmeyen bir hata oluştu.");
       setLoadingState(LoadingState.ERROR);
@@ -144,7 +133,6 @@ const App: React.FC = () => {
               setError(null);
               setInitialPrompt('');
           }}
-          onTestImage={handleTestImage}
           isGenerating={loadingState === LoadingState.LOADING}
           currentMode={activeMode}
           initialText={initialPrompt}
