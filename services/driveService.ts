@@ -7,10 +7,11 @@ declare const google: any;
 
 /** 
  * ŞAFAK ESNAFIMIN DİKKATİNE:
- * 1. Google Cloud Console'da (console.cloud.google.com) bir proje oluşturun.
- * 2. 'APIs & Services' > 'Credentials' kısmından 'OAuth 2.0 Client ID' (Web Application) oluşturun.
- * 3. 'Authorized JavaScript Origins' kısmına ŞU ANKİ TARAYICI ADRESİNİ (örn: https://...web-platform.io) ekleyin.
- * 4. OAuth Onay Ekranı (Consent Screen) kısmında projenizi 'Testing' modunda bırakıyorsanız kendi mailinizi 'Test Users' olarak ekleyin.
+ * Aldığın 'redirect_uri_mismatch' hatasını çözmek için:
+ * 1. console.cloud.google.com adresine git.
+ * 2. APIs & Services > Credentials > OAuth 2.0 Client ID (Web Application) içine gir.
+ * 3. 'Authorized JavaScript Origins' kısmına AŞAĞIDAKİ ADRESİ EKLE:
+ *    (Tarayıcı adres çubuğundaki protokol dahil kök dizin)
  */
 const CLIENT_ID = '1055129081162-chh4eumm371balnqajrc1lbu5uk26chp.apps.googleusercontent.com'; 
 const SCOPES = 'https://www.googleapis.com/auth/drive.file';
@@ -20,11 +21,8 @@ let accessToken: string | null = null;
 
 const getAccessToken = (): Promise<string> => {
   return new Promise((resolve, reject) => {
-    // Placeholder kontrolü
-    if (CLIENT_ID.startsWith('YOUR_')) {
-      reject(new Error("Lütfen driveService.ts içindeki CLIENT_ID değişkenini Google Cloud Console'dan aldığınız ID ile değiştirin."));
-      return;
-    }
+    // Mevcut origin'i konsola bas ki kullanıcı kopyalayabilsin
+    console.log("🛠️ Google Cloud Console'a eklemen gereken ORIGIN:", window.location.origin);
 
     if (accessToken) {
       resolve(accessToken);
@@ -33,7 +31,7 @@ const getAccessToken = (): Promise<string> => {
 
     try {
       if (typeof google === 'undefined') {
-          throw new Error("Google Identity Services kütüphanesi yüklenemedi. Sayfayı yenileyip tekrar deneyin.");
+          throw new Error("Google Kütüphanesi (GSI) henüz yüklenmedi. Lütfen sayfayı yenileyin.");
       }
 
       const client = google.accounts.oauth2.initTokenClient({
@@ -41,11 +39,12 @@ const getAccessToken = (): Promise<string> => {
         scope: SCOPES,
         callback: (response: any) => {
           if (response.error) {
-            console.error("Google Auth Error:", response);
-            // Hata 400 detaylandırması
-            let errorMsg = `Yetkilendirme hatası: ${response.error_description || response.error}`;
-            if (response.error === 'invalid_client') errorMsg = "Hata 400: Client ID geçersiz veya hatalı kopyalanmış.";
-            reject(new Error(errorMsg));
+            console.error("❌ Google Yetkilendirme Hatası Detayı:", response);
+            let msg = `Yetkilendirme hatası: ${response.error_description || response.error}`;
+            if (response.error === 'redirect_uri_mismatch' || response.error === 'invalid_request') {
+                msg += "\n\nİPUCU: Google Cloud Console'da 'Authorized JavaScript Origins' kısmına şu adresi eklemelisiniz: " + window.location.origin;
+            }
+            reject(new Error(msg));
             return;
           }
           accessToken = response.access_token;
@@ -87,13 +86,15 @@ const getOrCreateFolder = async (token: string): Promise<string> => {
 };
 
 export const uploadToGoogleDrive = async (base64Data: string, fileName: string): Promise<boolean> => {
-  console.log("🛠️ Drive Debug: Yükleme denemesi...", fileName);
+  console.log("🚀 Drive yükleme denemesi başlatıldı...");
   
   try {
     const token = await getAccessToken();
     const folderId = await getOrCreateFolder(token);
 
     const base64Parts = base64Data.split(',');
+    if (base64Parts.length < 2) throw new Error("Görsel verisi bozuk.");
+    
     const byteString = atob(base64Parts[1]);
     const arrayBuffer = new ArrayBuffer(byteString.length);
     const uint8Array = new Uint8Array(arrayBuffer);
@@ -117,16 +118,11 @@ export const uploadToGoogleDrive = async (base64Data: string, fileName: string):
       return true;
     } else {
       const errData = await uploadResponse.json();
-      throw new Error(errData.error?.message || "Yükleme başarısız.");
+      throw new Error(errData.error?.message || "Yükleme sırasında teknik bir hata oluştu.");
     }
   } catch (error: any) {
-    console.error("❌ Drive Hatası Detayı:", error);
-    
-    // Şafak Esnafım için debug yardımı:
-    console.log("💡 İPUCU: Hata 400 alıyorsan, Google Cloud Console'da 'Authorized JavaScript Origins' kısmına şu adresi eklemelisin:");
-    console.log(window.location.origin);
-    
-    alert(`❌ Hata: ${error.message}\n\nKonsoldaki (F12) talimatları takip edin.`);
+    console.error("❌ Drive Yükleme Hatası:", error);
+    alert(`❌ Hata: ${error.message}`);
     return false;
   }
 };
