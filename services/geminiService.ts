@@ -1,6 +1,6 @@
-import { GoogleGenAI } from "@google/genai";
-import { SYSTEM_INSTRUCTION, IMAGE_GEN_INSTRUCTION } from "../constants";
-import { VisualGenerationType, AspectRatio, TokenUsage } from "../types";
+import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
+import { SYSTEM_INSTRUCTION, IMAGE_GEN_INSTRUCTION, TONE_DESCRIPTIONS } from "../constants";
+import { VisualGenerationType, AspectRatio, TokenUsage, TextTone } from "../types";
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
@@ -28,7 +28,6 @@ const fileToPart = (file: File): Promise<{ inlineData: { data: string; mimeType:
  * Converts a base64 string (from localStorage) to a Part.
  */
 const base64ToPart = (base64String: string): { inlineData: { data: string; mimeType: string } } => {
-    // base64String usually comes as "data:image/png;base64,iVBOR..."
     const parts = base64String.split(',');
     const mimeMatch = parts[0].match(/:(.*?);/);
     const mimeType = mimeMatch ? mimeMatch[1] : 'image/png';
@@ -49,21 +48,25 @@ interface ServiceResponse {
 
 export const generatePostContent = async (
   promptText: string,
-  imageFile: File | null
+  imageFile: File | null,
+  tone: TextTone = 'friendly'
 ): Promise<ServiceResponse> => {
   try {
     const parts: any[] = [];
 
-    // Add image if exists
     if (imageFile) {
       const imagePart = await fileToPart(imageFile);
       parts.push(imagePart);
     }
 
-    // Add text prompt
-    const textPrompt = promptText.trim() === "" && imageFile
-      ? "Bu görseli analiz et ve Can Kuruyemiş dükkanı için harika bir gönderi hazırla."
-      : promptText;
+    const toneInstruction = TONE_DESCRIPTIONS[tone] || TONE_DESCRIPTIONS.friendly;
+    const textPrompt = `
+      Kullanıcının isteği: ${promptText || "Can Kuruyemiş için genel bir paylaşım."}
+      
+      Yazım Stili (TONE): ${toneInstruction}
+      
+      Lütfen bu stili metnin her yerine yansıt.
+    `;
 
     parts.push({ text: textPrompt });
 
@@ -74,7 +77,7 @@ export const generatePostContent = async (
       },
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
-        temperature: 0.7,
+        temperature: 0.8,
       }
     });
 
@@ -106,25 +109,19 @@ export const generateVisualContent = async (
     const parts: any[] = [];
     let finalPrompt = "";
 
-    // 1. Add Reference Image (if provided)
     if (imageFile) {
       const imagePart = await fileToPart(imageFile);
       parts.push(imagePart);
     }
 
-    // 2. Add Logo Image (if provided and needed)
     if (logoBase64 && visualType === VisualGenerationType.ADVERTISEMENT) {
         const logoPart = base64ToPart(logoBase64);
         parts.push(logoPart);
     }
 
-    // 3. Construct Prompt based on Type
-    // Note: We use declarative prompts instead of "Act as..." to prevent the model from chatting.
     if (visualType === VisualGenerationType.ENHANCE) {
-        // Mode: ENHANCE
         finalPrompt = `Enhance the provided food image to look like professional cinematic food photography. ${promptText ? "Additional request: " + promptText : ""}. ${IMAGE_GEN_INSTRUCTION}`;
     } else {
-        // Mode: ADVERTISEMENT
         finalPrompt = `Professional commercial food photography of: ${promptText || "Delicious premium nuts and snacks"}. 
         INSTRUCTION: If the prompt specifically asks to write text/words (e.g. 'Write 50% SALE'), you MUST include that text in the image. Ensure the text is spelled correctly, legible, and integrated naturally (e.g. on a chalkboard sign, price tag, or overlay).
         ${imageFile ? "Use the first provided image as visual reference." : ""} 
@@ -140,8 +137,6 @@ export const generateVisualContent = async (
         parts: parts
       },
       config: {
-        // We DO NOT use systemInstruction here because it can cause the model to output text instead of an image.
-        // The style guide is appended to the prompt instead.
         imageConfig: {
           aspectRatio: aspectRatio,
         }
@@ -154,7 +149,6 @@ export const generateVisualContent = async (
         totalTokens: response.usageMetadata.totalTokenCount || 0,
     } : undefined;
 
-    // Check for image in response parts
     if (response.candidates?.[0]?.content?.parts) {
       for (const part of response.candidates[0].content.parts) {
         if (part.inlineData) {
@@ -166,10 +160,8 @@ export const generateVisualContent = async (
       }
     }
     
-    // If no image part found, check if there is text and throw it as error
     const textOutput = response.text;
     if (textOutput) {
-        console.warn("Model returned text instead of image:", textOutput);
         throw new Error(`Görsel üretilemedi, model şu yanıtı verdi: ${textOutput.substring(0, 100)}...`);
     }
     
@@ -178,5 +170,28 @@ export const generateVisualContent = async (
   } catch (error: any) {
     console.error("Gemini API Error (Image):", error);
     throw new Error(error.message || "Görsel üretilirken bir sorun oluştu.");
+  }
+};
+
+export const streamChat = async (
+  history: { role: 'user' | 'model'; parts: { text: string }[] }[],
+  onChunk: (text: string) => void
+) => {
+  const chat = ai.chats.create({
+    model: 'gemini-3-flash-preview',
+    config: {
+      systemInstruction: SYSTEM_INSTRUCTION + "\n\n**SOHBET MODU ÖZEL TALİMATI:** Kullanıcıyla samimi, yardımsever ve proaktif bir esnaf arkadaşı gibi sohbet et. Kısa ve öz cevaplar ver.",
+      history: history.slice(0, -1), // Send previous history
+    }
+  });
+
+  const lastMessage = history[history.length - 1].parts[0].text;
+  const result = await chat.sendMessageStream({ message: lastMessage });
+
+  for await (const chunk of result) {
+    const chunkText = (chunk as GenerateContentResponse).text;
+    if (chunkText) {
+      onChunk(chunkText);
+    }
   }
 };
