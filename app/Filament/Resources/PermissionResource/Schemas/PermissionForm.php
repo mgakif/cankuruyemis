@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Filament\Resources\PermissionResource\Schemas;
+
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
+
+class PermissionForm
+{
+    public static function configure(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                TextInput::make('name')
+                    ->label('İzin Adı')
+                    ->required()
+                    ->maxLength(255)
+                    ->unique(ignoreRecord: true),
+            ]);
+    }
+}
+

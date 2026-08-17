@@ -1,0 +1,40 @@
+services:
+    cankuruyemis:
+        build:
+            context: "./vendor/laravel/sail/runtimes/8.4"
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: "${WWWGROUP}"
+        image: "sail-8.4/app"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        # Port mapping removed as Traefik will handle this
+        # ports:
+        #    - "${APP_PORT:-80}:80"
+        expose:
+            - "80"
+        #ports:
+        #    - "${VITE_PORT:-5173}:${VITE_PORT:-5173}" # Keep Vite port for dev
+        environment:
+            WWWUSER: "${WWWUSER}"
+            LARAVEL_SAIL: 1
+            XDEBUG_MODE: "${SAIL_XDEBUG_MODE:-off}"
+            XDEBUG_CONFIG: "${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}"
+            IGNITION_LOCAL_SITES_PATH: "${PWD}"
+            UID: 1000
+            GID: 1000
+        volumes:
+            - ".:/var/www/html"
+        networks:
+            - sail
+
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.cankuruyemis.rule=Host(`cankuruyemis.test`)"
+            - "traefik.http.routers.cankuruyemis.entrypoints=web"
+            - "traefik.http.services.cankuruyemis.loadbalancer.server.port=80"
+            - "traefik.docker.network=sail" # "sail" network'ünü işaret ettiğinden emin olun
+
+networks:
+    sail:
+        external: true
