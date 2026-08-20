@@ -115,11 +115,11 @@
             <div class="relative w-full h-[300px] rounded-xl overflow-hidden border border-[#e8dbce] dark:border-gray-800 shadow-sm mt-2">
                 <iframe 
                     allowfullscreen="" 
-                    data-alt="Map showing the location of the company" 
+                    data-alt="Can Kuruyemiş ve Şekerleme konumu" 
                     height="100%" 
                     loading="lazy" 
                     referrerpolicy="no-referrer-when-downgrade" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1053.3057450383894!2d29.003583485277808!3d41.09247851470928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab67c656a63a9%3A0x92150d7114b2eabc!2zU3VsdGFuIFNlbGltLCBFc2tpIELDvHnDvGtkZXJlIENkLiBObzo1NywgMzQ0MTUgS2HEn8SxdGhhbmUvxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1768509789813!5m2!1str!2str" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25559.08374812298!2d34.58049149772587!3d36.79729633902992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1527f5447e5817ef%3A0xc6bb4d7fd77af2b0!2sCan%20Kuruyemi%C5%9F%20ve%20%C5%9Eekerleme!5e0!3m2!1str!2str!4v1787252641245!5m2!1str!2str" 
                     style="border:0; filter: grayscale(1) contrast(1.2) opacity(0.9);" 
                     width="100%">
                 </iframe>
