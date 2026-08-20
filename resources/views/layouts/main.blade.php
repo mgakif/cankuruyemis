@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="facebook-domain-verification" content="k8t8m1bzuneqi8msgkqd4re9shosax" />
     
     @if(setting('favicon'))
         <link rel="icon" href="{{ asset(setting('favicon')) }}" type="image/x-icon">
