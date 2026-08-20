@@ -5,7 +5,7 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
-function setting($slug)
+function setting($slug, $default = null)
 {
     $slugAliases = [
         'sadece-magazada-satilan-urunleri-goster' => 'magaza-urunleri-goster',
@@ -16,7 +16,7 @@ function setting($slug)
     try {
         // return 0;
         // Cache::flush();
-        return Cache::rememberForever('setting_'.$slug, function () use ($resolvedSlug) {
+        $value = Cache::rememberForever('setting_'.$slug, function () use ($resolvedSlug) {
             $setting = Setting::where('slug', $resolvedSlug)->first();
             if (! $setting) {
                 return null;
@@ -30,22 +30,24 @@ function setting($slug)
 
             return $setting->value;
         });
+
+        return $value ?? $default;
     } catch (\Exception $e) {
         // Cache yazma hatası durumunda direkt database'den oku
         try {
             $setting = Setting::where('slug', $resolvedSlug)->first();
             if (! $setting) {
-                return null;
+                return $default;
             }
             if ($setting->type == 'select') {
-                return $setting->attributes['options'][$setting->value] ?? null;
+                return $setting->attributes['options'][$setting->value] ?? $default;
             }
             if ($setting->type == 'file' || $setting->type == 'image') {
                 return 'storage/'.$setting->value;
             }
-            return $setting->value;
+            return $setting->value ?? $default;
         } catch (\Exception $e2) {
-            return null;
+            return $default;
         }
     }
 }

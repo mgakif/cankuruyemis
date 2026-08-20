@@ -155,7 +155,7 @@ class PageController extends Controller
     public function hakkimizda(): View
     {
         $title = 'Hakkımızda';
-        $description = setting('description') ?: 'Hakkımızda sayfası';
+        $description = 'Can Kuruyemiş, 2024 yılında girişimci Zeynep Tekin tarafından Mersin’de kuruldu. Tazelik, kalite ve güvenle kuruyemiş, kuru meyve ve özel lezzetler sunuyoruz.';
         
         // SEO Meta Tags
         $siteName = setting('title') ?: config('app.name');

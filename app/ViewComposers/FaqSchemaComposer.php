@@ -14,6 +14,7 @@ class FaqSchemaComposer
     public function compose(View $view): void
     {
         if (! Schema::hasTable('faqs')) {
+            $view->with('faqs', collect());
             $view->with('faqSchema', '');
 
             return;
@@ -26,6 +27,8 @@ class FaqSchemaComposer
                 ->orderBy('order')
                 ->get();
         });
+
+        $view->with('faqs', $faqs);
 
         // FAQ'lar varsa schema oluştur
         if ($faqs->isNotEmpty()) {

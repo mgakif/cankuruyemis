@@ -31,13 +31,13 @@
             <!-- Content -->
             <div class="relative z-20 text-center max-w-3xl px-4">
                 <span class="inline-block py-1 px-3 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-white text-xs font-bold uppercase tracking-wider mb-6">
-                    {{ setting('kurulus-yili') ?: '2010' }} Yılından Beri
+                    {{ setting('kurulus-yili') ?: '2024' }}'ten Beri
                 </span>
                 <h1 class="text-white text-5xl md:text-6xl lg:text-7xl font-black font-serif leading-tight tracking-tight mb-6">
-                    {{ setting('hakkimizda-baslik') ?: 'Doğada Kök Salmış, Size Ulaştırıyoruz' }}
+                    {{ setting('hakkimizda-baslik') ?: 'Tazelik, Kalite ve Güven' }}
                 </h1>
                 <p class="text-white/90 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto mb-10">
-                    {{ setting('hakkimizda-alt-baslik') ?: 'Sağlıklı atıştırmalıklara olan tutkumuz ve mükemmel çıtırlığı arayışımız. Bahçenin en iyilerini doğrudan kilerin senin.' }}
+                    {{ setting('hakkimizda-alt-baslik') ?: '2024 yılında girişimci Zeynep Tekin tarafından Mersin’de kurulan Can Kuruyemiş; özenle seçilmiş kuruyemiş, kuru meyve ve özel lezzetlerle gönül rahatlığıyla alışveriş edebileceğiniz sıcak bir duraktır.' }}
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#hikaye" class="inline-flex h-12 items-center justify-center rounded-xl bg-primary px-8 text-base font-bold text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
@@ -63,26 +63,35 @@
                         {{ setting('misyon-baslik') ?: 'Doğanın İyiliğini Korumak' }}
                     </h3>
                     <div class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed space-y-4">
-                        {!! setting('hakkimizda') ?: '<p>Basit bir inançla başladık: atıştırmalıklar basit, sağlıklı ve lezzetli olmalı. Küçük bir aile mutfağında başlayan yolculuğumuz, en taze, katkısız kuru meyve ve kuruyemişler sunma taahhüdüne dönüştü.</p><p>Sattığımız her badem, kayısı ve kaju, sürdürülebilir tarım ve etik kaynak kullanımına olan bağlılığımızın bir kanıtıdır. Sadece atıştırmalık satmıyoruz; toprakla ve ona bakan insanlarla ilişkiler kuruyoruz.</p>' !!}
+                        {!! setting('hakkimizda') ?: '<p>Can Kuruyemiş olarak işimizin temelinde <strong>tazelik, kalite ve güven</strong> olduğuna inanıyoruz.</p><p>Müşterilerimize sunduğumuz her ürünü özenle seçiyor; kuruyemişten kuru meyveye, atıştırmalıklardan özel lezzetlere kadar geniş ürün yelpazemizde kalite standardımızı korumaya önem veriyoruz. Amacımız yalnızca ürün satmak değil, müşterilerimizin gönül rahatlığıyla alışveriş yapabileceği sıcak ve güvenilir bir ortam oluşturmak.</p><p>Kuruyemişte lezzetin en önemli unsurunun tazelik olduğunu biliyoruz. Bu nedenle ürünlerimizin saklama koşullarından sunumuna kadar her aşamada titiz davranıyoruz. Geleneksel lezzetleri günümüzün hizmet anlayışıyla bir araya getirerek hem günlük alışverişlerinizde hem de misafir sofralarınızda keyifle tercih edebileceğiniz ürünler sunuyoruz.</p><p>Can Kuruyemiş’te müşterilerimiz bizim için yalnızca alışveriş yapan kişiler değil, uzun yıllar boyunca aynı güvenle hizmet vermek istediğimiz komşularımız ve dostlarımızdır. Bu nedenle güler yüzlü hizmeti, dürüstlüğü ve müşteri memnuniyetini işimizin ayrılmaz bir parçası olarak görüyoruz.</p>' !!}
                     </div>
+                </div>
+
+                <div class="rounded-2xl border border-primary/20 bg-primary/5 dark:bg-primary/10 p-6">
+                    <p class="text-primary font-bold uppercase tracking-widest text-xs mb-2">Kurucu</p>
+                    <h4 class="text-2xl font-serif font-bold text-text-dark dark:text-white">Zeynep Tekin</h4>
+                    <p class="text-sm text-primary font-medium mb-3">Girişimci · Çevre Mühendisi · 1 Çocuk Annesi</p>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Can Kuruyemiş, 2024 yılında girişimci Zeynep Tekin tarafından kuruldu. Çevre mühendisi kimliği ve aile odaklı bakış açısıyla tazelik, kalite ve güveni işinin merkezine koyuyor; müşterilerimizi komşu ve dost olarak görüyoruz.
+                    </p>
                 </div>
 
                 <!-- Timeline -->
                 <div class="mt-8 border-l-2 border-secondary pl-8 space-y-10 relative">
                     <div class="relative">
                         <span class="absolute -left-[41px] top-0 flex size-5 items-center justify-center rounded-full bg-primary ring-4 ring-white dark:ring-background-dark"></span>
-                        <h4 class="text-lg font-bold text-text-dark dark:text-white">{{ setting('kurulus-yili') ?: '2010' }} Yılında Kurulduk</h4>
-                        <p class="text-gray-600 dark:text-gray-400">{{ setting('timeline-1') ?: 'Tek bir kavurma fırını olan küçük bir mutfaktan başladık.' }}</p>
+                        <h4 class="text-lg font-bold text-text-dark dark:text-white">{{ setting('kurulus-yili') ?: '2024' }} Yılında Kurulduk</h4>
+                        <p class="text-gray-600 dark:text-gray-400">{{ setting('timeline-1') ?: 'Çevre mühendisi ve bir çocuk annesi girişimci Zeynep Tekin tarafından Mersin’de kurulduk.' }}</p>
                     </div>
                     <div class="relative">
                         <span class="absolute -left-[41px] top-0 flex size-5 items-center justify-center rounded-full bg-secondary ring-4 ring-white dark:ring-background-dark"></span>
-                        <h4 class="text-lg font-bold text-text-dark dark:text-white">İlk Çiftlik Ortaklığı</h4>
-                        <p class="text-gray-600 dark:text-gray-400">{{ setting('timeline-2') ?: 'Yerel badem yetiştiricileriyle doğrudan kaynak sağlama anlaşması.' }}</p>
+                        <h4 class="text-lg font-bold text-text-dark dark:text-white">Tazelik ve Kalite Standardı</h4>
+                        <p class="text-gray-600 dark:text-gray-400">{{ setting('timeline-2') ?: 'Saklama koşullarından sunuma kadar her aşamada titiz davranıyor; kuruyemişten kuru meyveye özenle seçilmiş ürünler sunuyoruz.' }}</p>
                     </div>
                     <div class="relative">
                         <span class="absolute -left-[41px] top-0 flex size-5 items-center justify-center rounded-full bg-secondary ring-4 ring-white dark:ring-background-dark"></span>
-                        <h4 class="text-lg font-bold text-text-dark dark:text-white">Online Lansmanı</h4>
-                        <p class="text-gray-600 dark:text-gray-400">{{ setting('timeline-3') ?: 'Doğal atıştırmalıklarımızı tüm Türkiye\'ye ulaştırmaya başladık.' }}</p>
+                        <h4 class="text-lg font-bold text-text-dark dark:text-white">Komşuluk ve Güven</h4>
+                        <p class="text-gray-600 dark:text-gray-400">{{ setting('timeline-3') ?: 'Müşterilerimizi uzun yıllar aynı güvenle hizmet vermek istediğimiz komşularımız ve dostlarımız olarak görüyoruz.' }}</p>
                     </div>
                 </div>
             </div>
@@ -103,8 +112,8 @@
                             <div class="text-primary mb-2">
                                 <span class="material-icons-round text-4xl">eco</span>
                             </div>
-                            <div class="font-bold text-2xl text-text-dark dark:text-white">100%</div>
-                            <div class="text-sm font-medium text-gray-600 dark:text-gray-400">Organik Kaynak</div>
+                            <div class="font-bold text-2xl text-text-dark dark:text-white">Taze</div>
+                            <div class="text-sm font-medium text-gray-600 dark:text-gray-400">Özenle Seçilmiş Ürün</div>
                         </div>
                     </div>
                     <div class="space-y-4">
@@ -112,8 +121,8 @@
                             <div class="text-primary mb-2">
                                 <span class="material-icons-round text-4xl">handshake</span>
                             </div>
-                            <div class="font-bold text-2xl text-text-dark dark:text-white">{{ setting('ciftlik-sayisi') ?: '50+' }}</div>
-                            <div class="text-sm font-medium text-gray-600 dark:text-gray-400">Çiftlik Ortağı</div>
+                            <div class="font-bold text-2xl text-text-dark dark:text-white">{{ setting('kurulus-yili') ?: '2024' }}</div>
+                            <div class="text-sm font-medium text-gray-600 dark:text-gray-400">Kuruluş Yılı</div>
                         </div>
                         <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-gray-200 dark:bg-gray-700">
                             @if(setting('hakkimizda-resim-2'))
@@ -136,39 +145,39 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-3xl md:text-4xl font-serif font-black text-text-dark dark:text-white mb-4">Temel Değerlerimiz</h2>
-            <p class="text-gray-600 dark:text-gray-300 text-lg">Ne yediğinizin önemli olduğuna ve nasıl yetiştirildiğinin daha da önemli olduğuna inanıyoruz.</p>
+            <p class="text-gray-600 dark:text-gray-300 text-lg">İşimizin temelinde tazelik, kalite ve güven vardır; her ürünü bu anlayışla seçer ve sunarız.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Value 1 -->
             <div class="bg-background-light dark:bg-background-dark p-8 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl transition-shadow group">
                 <div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                    <span class="material-icons-round text-2xl">local_florist</span>
+                    <span class="material-icons-round text-2xl">spa</span>
                 </div>
-                <h3 class="text-xl font-bold text-text-dark dark:text-white mb-3">100% Organik</h3>
+                <h3 class="text-xl font-bold text-text-dark dark:text-white mb-3">Tazelik</h3>
                 <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {{ setting('deger-1') ?: 'Sentetik pestisit veya gübre olmadan yetiştirilen sertifikalı organik ürünler. Her şeyden önce doğanın sürecine güveniyoruz.' }}
+                    {{ setting('deger-1') ?: 'Kuruyemişte lezzetin en önemli unsurunun tazelik olduğunu biliyoruz. Saklama koşullarından sunuma kadar her aşamada titiz davranıyoruz.' }}
                 </p>
             </div>
 
             <!-- Value 2 -->
             <div class="bg-background-light dark:bg-background-dark p-8 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl transition-shadow group">
                 <div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                    <span class="material-icons-round text-2xl">diversity_3</span>
+                    <span class="material-icons-round text-2xl">verified</span>
                 </div>
-                <h3 class="text-xl font-bold text-text-dark dark:text-white mb-3">Adil Ticaret</h3>
+                <h3 class="text-xl font-bold text-text-dark dark:text-white mb-3">Kalite</h3>
                 <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {{ setting('deger-2') ?: 'Adil ücret ve etik çalışma koşulları ile çiftçilere doğrudan destek. Çiftçilerimiz geliştiğinde, kalitemiz de gelişir.' }}
+                    {{ setting('deger-2') ?: 'Kuruyemişten kuru meyveye, atıştırmalıklardan özel lezzetlere kadar her ürünü özenle seçiyor; kalite standardımızı korumaya önem veriyoruz.' }}
                 </p>
             </div>
 
             <!-- Value 3 -->
             <div class="bg-background-light dark:bg-background-dark p-8 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl transition-shadow group">
                 <div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                    <span class="material-icons-round text-2xl">recycling</span>
+                    <span class="material-icons-round text-2xl">handshake</span>
                 </div>
-                <h3 class="text-xl font-bold text-text-dark dark:text-white mb-3">Sıfır Atık</h3>
+                <h3 class="text-xl font-bold text-text-dark dark:text-white mb-3">Güven</h3>
                 <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {{ setting('deger-3') ?: 'Sürdürülebilir paketleme çözümleri ve her adımda çevre ayak izimizi en aza indirme taahhüdü.' }}
+                    {{ setting('deger-3') ?: 'Güler yüzlü hizmet, dürüstlük ve müşteri memnuniyeti işimizin ayrılmaz parçasıdır. Sizi komşumuz ve dostumuz olarak görüyoruz.' }}
                 </p>
             </div>
         </div>
@@ -176,7 +185,7 @@
 </section>
 
 <!-- Meet the Family (Team) -->
-@if(setting('takim-goster', true))
+@if(setting('takim-goster'))
 <section class="py-20 bg-background-light dark:bg-background-dark">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
@@ -216,7 +225,7 @@
 @endif
 
 <!-- From the Source Gallery -->
-@if(setting('galeri-goster', true))
+@if(setting('galeri-goster'))
 <section class="py-20 bg-background-light dark:bg-background-dark overflow-hidden">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-10 flex items-center justify-between">
@@ -250,8 +259,10 @@
 </section>
 @endif
 
+@include('partials.faq')
+
 <!-- Newsletter -->
-@if(setting('newsletter-goster', true))
+@if(setting('newsletter-goster'))
 <section class="py-16 bg-accent-light dark:bg-accent-dark">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="bg-primary rounded-2xl p-8 md:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">

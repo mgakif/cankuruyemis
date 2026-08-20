@@ -240,6 +240,8 @@
 </section>
 @endif
 
+@include('partials.faq')
+
 <!-- CTA Section -->
 <section class="py-20 relative overflow-hidden">
     <div class="absolute inset-0 bg-primary">
