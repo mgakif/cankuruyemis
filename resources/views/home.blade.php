@@ -123,7 +123,7 @@
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <a href="{{ route('products.index') }}?category=raw-nuts" class="group relative overflow-hidden rounded-2xl aspect-[4/5] shadow-lg">
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-orange-400 to-orange-600"></div>
+                <img src="{{ asset('images/categories/cig-findik.png') }}" alt="Çiğ Fındık" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-6">
                     <h3 class="text-white text-xl font-bold mb-1">Çiğ Fındık</h3>
@@ -134,7 +134,7 @@
             </a>
 
             <a href="{{ route('products.index') }}?category=dried-fruits" class="group relative overflow-hidden rounded-2xl aspect-[4/5] shadow-lg">
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-amber-400 to-amber-600"></div>
+                <img src="{{ asset('images/categories/kurutulmus-meyveler.png') }}" alt="Kurutulmuş Meyveler" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-6">
                     <h3 class="text-white text-xl font-bold mb-1">Kurutulmuş Meyveler</h3>
@@ -145,7 +145,7 @@
             </a>
 
             <a href="{{ route('products.index') }}?category=roasted-nuts" class="group relative overflow-hidden rounded-2xl aspect-[4/5] shadow-lg">
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-orange-500 to-orange-700"></div>
+                <img src="{{ asset('images/categories/kavrulmus-karisimlar.png') }}" alt="Kavrulmuş Karışımlar" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-6">
                     <h3 class="text-white text-xl font-bold mb-1">Kavrulmuş Karışımlar</h3>
@@ -156,7 +156,7 @@
             </a>
 
             <a href="{{ route('products.index') }}?category=turkish-delight" class="group relative overflow-hidden rounded-2xl aspect-[4/5] shadow-lg">
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-rose-400 to-rose-600"></div>
+                <img src="{{ asset('images/categories/geleneksel-tatlilar.png') }}" alt="Geleneksel Tatlılar" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-6">
                     <h3 class="text-white text-xl font-bold mb-1">Geleneksel Tatlılar</h3>
