@@ -18,6 +18,7 @@ class OrganizationSchema implements SchemaInterface
             '@context' => 'https://schema.org',
             '@type' => 'Organization',
             'name' => $this->name,
+            'legalName' => 'Zeynep Tekin',
             'url' => $this->url ?: config('app.url'),
             'logo' => $this->logo ?: asset('logo.png'),
         ];

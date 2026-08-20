@@ -23,6 +23,7 @@ class BlogPostSchema implements SchemaInterface
             'publisher' => [
                 '@type' => 'Organization',
                 'name' => setting('app-name'),
+                'legalName' => 'Zeynep Tekin',
                 'logo' => [
                     '@type' => 'ImageObject',
                     'url' => asset(setting('logo')),

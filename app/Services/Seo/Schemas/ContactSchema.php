@@ -20,6 +20,7 @@ class ContactSchema implements SchemaInterface
             $data['mainEntity'] = [
                 '@type' => 'Organization',
                 'name' => $orgName,
+                'legalName' => 'Zeynep Tekin',
                 'url' => $orgUrl,
             ];
             

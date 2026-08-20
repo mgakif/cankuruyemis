@@ -8,7 +8,8 @@ class SharedSchemas
     {
         return [
             '@type' => 'Organization',
-            'name' => setting('app-name'),
+            'name' => setting('app-name') ?: setting('title') ?: config('app.name'),
+            'legalName' => 'Zeynep Tekin',
             'logo' => [
                 '@type' => 'ImageObject',
                 'url' => asset(setting('logo')),
