@@ -77,6 +77,13 @@
             <div>
                 <h4 class="text-lg font-serif mb-6 text-orange-100">İletişim</h4>
                 <ul class="space-y-4 text-sm text-gray-400">
+                    <li class="flex items-start gap-3">
+                        <span class="material-icons-round text-secondary mt-0.5">business</span>
+                        <span>
+                            Yasal işletme sahibi / Ticari unvan: Zeynep Tekin<br>
+                            Marka: Can Kuruyemiş
+                        </span>
+                    </li>
                     @if(setting('adres'))
                         <li class="flex items-start gap-3">
                             <span class="material-icons-round text-secondary mt-0.5">location_on</span>

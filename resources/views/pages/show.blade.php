@@ -22,7 +22,7 @@
 @endpush
 
 @section('content')
-<main class="flex-grow w-full max-w-[1200px] mx-auto px-4 lg:px-8 py-10 lg:py-16">
+<main class="flex-grow w-full max-w-[1200px] mx-auto px-4 pt-40 pb-10 lg:px-8 lg:pt-44 lg:pb-16">
     <!-- Page Header -->
     <div class="mb-12">
         <h1 class="text-text-dark dark:text-text-light text-4xl lg:text-5xl font-black leading-tight tracking-[-0.033em] mb-4">

@@ -49,6 +49,20 @@
         <div class="lg:col-span-5 flex flex-col gap-6">
             <!-- Info Cards Stack -->
             <div class="flex flex-col gap-4">
+                <!-- Business Information Card -->
+                <div class="flex items-start gap-4 rounded-xl border border-[#e8dbce] dark:border-gray-800 bg-white dark:bg-[#1a120b] p-5 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary shrink-0">
+                        <span class="material-symbols-outlined text-[24px]">business</span>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <h2 class="text-text-dark dark:text-text-light text-lg font-bold leading-tight">İşletme Bilgileri</h2>
+                        <p class="text-[#9c7349] dark:text-gray-400 text-sm font-normal leading-relaxed">
+                            Yasal işletme sahibi / Ticari unvan: Zeynep Tekin<br>
+                            Marka: Can Kuruyemiş
+                        </p>
+                    </div>
+                </div>
+
                 <!-- Address Card -->
                 <div class="flex items-start gap-4 rounded-xl border border-[#e8dbce] dark:border-gray-800 bg-white dark:bg-[#1a120b] p-5 shadow-sm hover:shadow-md transition-shadow">
                     <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary shrink-0">
