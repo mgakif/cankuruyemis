@@ -272,17 +272,24 @@ class FormController extends Controller
             }
             
             // Trello API'ye istek gönder
-            try {
-                Http::asForm()->post('https://api.trello.com/1/cards', [
-                    'key' => setting('trello_key'),
-                    'token' => setting('trello_token'),
-                    'idList' => $form->trello_id,
-                    'name' => $cardName,
-                    'desc' => $desc,
-                ]);
-            } catch (\Exception $e) {
-                // Trello hatası form gönderimini engellemez
-                \Log::error('Trello kart oluşturma hatası: ' . $e->getMessage());
+            $trelloKey = setting('trello_key');
+            $trelloToken = setting('trello_token');
+
+            if (! $trelloKey || ! $trelloToken) {
+                \Log::warning('Trello kartı oluşturulamadı: API bilgileri tanımlı değil.');
+            } else {
+                try {
+                    Http::asForm()->post('https://api.trello.com/1/cards', [
+                        'key' => $trelloKey,
+                        'token' => $trelloToken,
+                        'idList' => $form->trello_id,
+                        'name' => $cardName,
+                        'desc' => $desc,
+                    ]);
+                } catch (\Exception $e) {
+                    // Trello hatası form gönderimini engellemez
+                    \Log::error('Trello kart oluşturma hatası: ' . $e->getMessage());
+                }
             }
         }
 
