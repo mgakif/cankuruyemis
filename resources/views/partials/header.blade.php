@@ -4,29 +4,30 @@
     $showStoreOnlyProducts = \App\Models\Product::shouldShowStoreOnlyOnSite();
 @endphp
 
-<div class="fixed inset-x-0 top-0 z-50 border-b border-primary/10 bg-[#2b1d12] text-white">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 px-4 py-2 text-xs sm:px-6 lg:px-8">
-        <div class="flex items-center gap-3 text-white/85">
-            <span class="inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-1 font-semibold uppercase tracking-[0.18em]">
+<header class="sticky top-0 z-50">
+<div class="border-b border-primary/10 bg-[#2b1d12] text-white">
+    <div class="mx-auto flex max-w-[90rem] flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3 text-xs sm:px-6 sm:text-[13px] lg:px-10">
+        <div class="flex min-w-0 flex-1 items-center gap-3 text-white/85">
+            <span class="inline-flex shrink-0 items-center gap-1 rounded-full bg-white/10 px-2.5 py-1 font-semibold uppercase tracking-[0.18em]">
                 Taze secim
             </span>
-                    <span class="hidden sm:inline">Kuruyemis, lokum, draje ve magazaya ozel urunler tek katalogda; online her yerden, magaza urunleri yakin cevre ve Getir ile.</span>
+            <span class="hidden min-w-0 leading-relaxed md:inline">Kuruyemis, lokum, draje ve magazaya ozel urunler tek katalogda; online her yerden, magaza urunleri yakin cevre ve Getir ile.</span>
         </div>
-        <div class="flex items-center gap-4">
+        <div class="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-1">
             @if($showStoreOnlyProducts)
-                <a href="{{ route('products.index', ['selectedChannel' => 'store_only']) }}" class="font-semibold text-amber-300 transition hover:text-amber-200">
+                <a href="{{ route('products.index', ['selectedChannel' => 'store_only']) }}" class="whitespace-nowrap font-semibold text-amber-300 transition hover:text-amber-200">
                     Yakin cevre + Getir
                 </a>
             @endif
             @foreach($phones as $phone)
-                <a href="tel:{{ $phone['tel'] }}" class="hidden sm:inline text-white/70 hover:text-white transition-colors">{{ $phone['display'] }}</a>
+                <a href="tel:{{ $phone['tel'] }}" class="whitespace-nowrap text-white/70 hover:text-white transition-colors">{{ $phone['display'] }}</a>
             @endforeach
         </div>
     </div>
 </div>
 
 <!-- Navigation -->
-<nav class="fixed top-[37px] w-full z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+<nav class="w-full bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
             <!-- Logo -->
@@ -179,3 +180,4 @@
         </div>
     </div>
 </nav>
+</header>

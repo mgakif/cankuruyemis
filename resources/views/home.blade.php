@@ -19,7 +19,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+<section class="relative pt-10 pb-16 md:pt-16 md:pb-24 overflow-hidden">
     <div class="absolute inset-0 z-0">
         @if(setting('og-image'))
             <img alt="{{ setting('title') ?: config('app.name') }} - Arkaplan"

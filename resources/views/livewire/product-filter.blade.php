@@ -40,7 +40,7 @@
         };
     @endphp
 
-    <section class="relative overflow-hidden bg-[#f6efe7] pb-24 pt-32 dark:bg-background-dark">
+    <section class="relative overflow-hidden bg-[#f6efe7] pb-24 pt-16 dark:bg-background-dark">
         <div class="absolute inset-0 opacity-60">
             <div class="absolute -left-20 top-0 h-64 w-64 rounded-full bg-primary/10 blur-3xl"></div>
             <div class="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-secondary/10 blur-3xl"></div>
