@@ -52,6 +52,38 @@ function setting($slug, $default = null)
     }
 }
 
+function contact_phones(): array
+{
+    $numbers = [
+        setting('telefon'),
+        setting('telefon-2') ?: '+90 532 722 54 83',
+    ];
+
+    $phones = [];
+    $seen = [];
+
+    foreach ($numbers as $number) {
+        $display = trim((string) $number);
+        if ($display === '') {
+            continue;
+        }
+
+        $digits = preg_replace('/[^\d+]/', '', $display) ?: '';
+        $normalized = preg_replace('/\D+/', '', $digits) ?: '';
+        if ($normalized === '' || isset($seen[$normalized])) {
+            continue;
+        }
+
+        $seen[$normalized] = true;
+        $phones[] = [
+            'display' => $display,
+            'tel' => str_starts_with($digits, '+') ? $digits : '+'.$normalized,
+        ];
+    }
+
+    return $phones;
+}
+
 function imageresize($upload_dir, $file, $width = null, $height = null, $optimize = 70, $webp = true)
 {
     // $upload_dir = 'images/tours/'; // storage dizini

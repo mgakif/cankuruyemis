@@ -90,12 +90,12 @@
                             <span>{!! nl2br(setting('adres')) !!}</span>
                         </li>
                     @endif
-                    @if(setting('telefon'))
+                    @foreach(contact_phones() as $phone)
                         <li class="flex items-center gap-3">
                             <span class="material-icons-round text-secondary">phone</span>
-                            <span>{{ setting('telefon') }}</span>
+                            <a href="tel:{{ $phone['tel'] }}" class="hover:text-secondary transition-colors">{{ $phone['display'] }}</a>
                         </li>
-                    @endif
+                    @endforeach
                     @if(setting('e-mail'))
                         <li class="flex items-center gap-3">
                             <span class="material-icons-round text-secondary">email</span>

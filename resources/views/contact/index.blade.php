@@ -80,20 +80,20 @@
                     </div>
                 </div>
                 
-                <!-- Phone Card -->
-                @if(setting('telefon'))
-                <a class="flex items-start gap-4 rounded-xl border border-[#e8dbce] dark:border-gray-800 bg-white dark:bg-[#1a120b] p-5 shadow-sm hover:shadow-md transition-shadow group" href="tel:{{ setting('telefon') }}">
+                <!-- Phone Cards -->
+                @foreach(contact_phones() as $phone)
+                <a class="flex items-start gap-4 rounded-xl border border-[#e8dbce] dark:border-gray-800 bg-white dark:bg-[#1a120b] p-5 shadow-sm hover:shadow-md transition-shadow group" href="tel:{{ $phone['tel'] }}">
                     <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors shrink-0">
                         <span class="material-symbols-outlined text-[24px]">call</span>
                     </div>
                     <div class="flex flex-col gap-1">
                         <h2 class="text-text-dark dark:text-text-light text-lg font-bold leading-tight">Telefon</h2>
                         <p class="text-[#9c7349] dark:text-gray-400 text-sm font-normal leading-relaxed group-hover:text-primary transition-colors">
-                            {{ setting('telefon') }}
+                            {{ $phone['display'] }}
                         </p>
                     </div>
                 </a>
-                @endif
+                @endforeach
                 
                 <!-- Email Card -->
                 @if(setting('e-mail'))

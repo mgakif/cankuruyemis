@@ -1,6 +1,6 @@
 @php
     $brandName = setting('title') ?: 'Can Kuruyemiş';
-    $phone = setting('telefon');
+    $phones = contact_phones();
     $showStoreOnlyProducts = \App\Models\Product::shouldShowStoreOnlyOnSite();
 @endphp
 
@@ -18,9 +18,9 @@
                     Yakin cevre + Getir
                 </a>
             @endif
-            @if($phone)
-                <span class="hidden sm:inline text-white/70">{{ $phone }}</span>
-            @endif
+            @foreach($phones as $phone)
+                <a href="tel:{{ $phone['tel'] }}" class="hidden sm:inline text-white/70 hover:text-white transition-colors">{{ $phone['display'] }}</a>
+            @endforeach
         </div>
     </div>
 </div>
@@ -150,6 +150,17 @@
                                 </a>
                             @endif
                         </div>
+
+                        @if($phones)
+                            <div class="mt-6 grid gap-2">
+                                @foreach($phones as $phone)
+                                    <a href="tel:{{ $phone['tel'] }}" class="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 dark:border-gray-800 px-4 py-3 text-sm font-semibold text-text-dark dark:text-text-light hover:text-primary transition-colors">
+                                        <span class="material-icons-round text-base">call</span>
+                                        {{ $phone['display'] }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        @endif
 
                         <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
                             <button
