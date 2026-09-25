@@ -19,12 +19,10 @@ class SeoHelper
         $schema = $params['schema'] ?? '';
         $breadCrumbSchema = $params['breadcrumbs'] ?? '';
         $schemaOrg = $params['schemaOrg'] ?? '';
-        $canonical = $params['canonical'] ?? '';
-        $robots = $params['robots'] ?? '';
         $schemaSitelinks = $params['schemaSitelinks'] ?? '';
         $travelAgencySchema = $params['travelAgencySchema'] ?? '';
 
-        return compact(
+        $vars = compact(
             'schemaFaq',
             'schemaItemListJson',
             'schemaCollectionPage',
@@ -32,11 +30,20 @@ class SeoHelper
             'schemaTourList',
             'breadCrumbSchema',
             'schemaOrg',
-            'canonical',
-            'robots',
             'schemaSitelinks',
             'travelAgencySchema'
         );
+
+        // These values are often merged with a page-specific SEO array. Do not
+        // replace a valid canonical URL or robots directive with an empty value
+        // when this helper is only used to add schemas or breadcrumbs.
+        foreach (['canonical', 'robots'] as $key) {
+            if (array_key_exists($key, $params)) {
+                $vars[$key] = $params[$key];
+            }
+        }
+
+        return $vars;
     }
 
     /**

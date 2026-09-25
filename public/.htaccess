@@ -5,6 +5,12 @@
 
     RewriteEngine On
 
+    # Keep one public URL for every page. This prevents http and www copies
+    # from being crawled as separate pages.
+    RewriteCond %{HTTPS} !=on [OR]
+    RewriteCond %{HTTP_HOST} !^cankuruyemismersin\.com$ [NC]
+    RewriteRule ^ https://cankuruyemismersin.com%{REQUEST_URI} [R=301,L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
