@@ -107,7 +107,7 @@
         </div>
 
         <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-            <p>© {{ date('Y') }} {{ $brandName }}. Tüm hakları saklıdır.</p>
+            <p>© {{ date('Y') }} {{ $brandName }}. Tüm hakları saklıdır. <span aria-hidden="true">·</span> <span class="platform-credit">Yazılım ve altyapı: <a href="https://bilgigram.com/" target="_blank" rel="noopener nofollow" style="color:inherit;font-weight:600">Bilgigram</a></span></p>
             <div class="flex space-x-6 mt-4 md:mt-0">
                 @if(Route::has('page.show'))
                     <a href="{{ route('page.show', 'gizlilik-sozlesmesi') }}" class="hover:text-gray-300">Gizlilik Politikası</a>
